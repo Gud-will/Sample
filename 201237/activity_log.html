@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <style>
+   	 .activity-block{
+   		 margin-left: auto;
+   		 margin-right: auto;
+   		 border-radius:50px;
+   		 background-color:#d8dee8;
+   		 width:60%;
+   		 height:50%;
+   		 min-width:300px;
+   		 min-height:300px;
+   		 max-width:600px;
+   		 max-height:800px;
+   		 text-align:center;
+   		 display:flex;
+   		 justify-content: space-evenly;
+   		 flex-direction: column;
+   	 }
+   	 .label{
+   		 margin-bottom:10px;
+   		 display:flex;
+   		 justify-content:space-between;
+   		 margin-left:20px;
+   		 margin-right:20px;
+   	 }
+   	 #act-inp{
+   		 height:50px;
+   		 width:60%;
+   		 padding: 12px 18px;
+   		 margin: 8px 0;
+   		 margin-left:5px;
+   		 border: 1px ;
+   		 border-radius: 4px;
+   		 max-width:60%;
+   		 min-width:40%;
+   		 min-height:40px;
+   		 max-height:200px;
+   		 }
+   	 input,select{
+   		 border-radius:3px;
+   		 border:0px;
+   		 padding:5px 5px 5px 5px;
+   	 }
+    </style>
+<title>Activity Log</title>
+<head>
+</head>
+<body>
+    <div class="activity-block">
+  	 <form class="act-form">
+  		 <h3 id="title">
+      		 Activity Log
+  		 </h3>
+  		 <div class="label">
+  		 <label for="date">
+      		 Date:
+  		 </label>
+  		 <input type="date" id="inpdate" name="date" max="2023-01-26" value="2023-01-01"></input>
+  		 </div>
+  		 <div class="label">
+  		 <label for="time">
+      		 Time:
+  		 </label>
+  		 <div class="time-input">
+  		 <select name="hours" id="hrs">
+      		 <option value=0>0</option>
+      		 <option value=1>1</option>
+      		 <option value=2>2</option>
+      		 <option value=3>3</option>
+      		 <option value=4>4</option>
+      		 <option value=5>5</option>
+      		 <option value=6>6</option>
+      		 <option value=7>7</option>
+      		 <option value=8>8</option>
+      		 <option value=9>9</option>
+      		 <option value=10>10</option>
+      		 <option value=11>11</option>
+      		 <option value=12>12</option>
+      		 <option value=13>13</option>
+      		 <option value=14>14</option>
+      		 <option value=15>15</option>
+  		 </select>
+  		 hrs
+  		 <select name="minutes" id="min">
+      		 <option value=0>0</option>
+      		 <option value=10>10</option>
+      		 <option value=15>15</option>
+      		 <option value=30>30</option>
+      		 <option value=45>45</option>
+      		 <option value=55>55</option>
+  		 </select>
+  		 min    
+  		 </div>
+  		 </div>
+  		 <div class="label" style="margin-left:20px">
+  		 <label for="activity">Activity:</label>
+  		 <textarea id="act-inp" row=5 col=10 maxlength=200></textarea>
+  		 </div>
+  		 <div class="label-submit">
+  		 <button type="button" id="send" onclick="onSubmit()">Submit</button>    
+  		 </div>
+  	 </form>
+    </div>
+    <h2>Logs</h2>
+    <div class="log"></div>
+    <script>
+   	 var log=[];
+   	 var date = new Date();
+   	 var month=''+date.getMonth()+1;
+   	 var day=''+date.getDate();
+   	 if(month.length<2){
+   	 	month='0'+month;
+   	 }
+   	 if(day.length<2){
+   	 	day='0'+day;
+   	 }
+   	 var currentDate = date.getFullYear()+"/"+month+"/"+day;
+   	 document.getElementById('inpdate').setAttribute('max', new Date().toISOString().split('T')[0]);
+   	 document.getElementById('inpdate').setAttribute('value', new Date().toISOString().split('T')[0]);
+   	 function onSubmit(){
+   		 const temp=[];
+   		 temp[0]=document.getElementById("inpdate").value;
+   		 temp[1]=[document.getElementById("hrs").value,document.getElementById("min").value];
+   		 temp[2]=document.getElementById("act-inp").value;
+   		 var str=''+temp[0]+temp[1][0]+"hrs"+temp[1][1]+"min"+temp[2];
+   		 log[log.length]=str;
+   		 document.getElementsByClassName('log')[0].innerHTML+=str+"<br>";
+   		 document.getElementsByClassName("act-form")[0].reset(); 
+   		 document.getElementById("inpdate").value=0; 
+   	 }
+    </script>
+</body>
+
+</html>
+
